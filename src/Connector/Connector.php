@@ -32,6 +32,13 @@ interface Connector
     );
 
     /**
+     * Get specific connection
+     *
+     * @return mixed
+     */
+    public function getConnection();
+
+    /**
      * Close an opened database connection
      */
     public function close();
