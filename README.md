@@ -16,6 +16,18 @@ Database-Manager of Phaba is a library for managing databases used by your PHP p
 
 ## Development
 
+### Coding
+
+PSR-2 PHP codification standard is used for writing phaba-database-manager source code.
+ 
+## Testing
+
+This library is testing against real database.
+
+### Initiate environment
+
+Specify database connection data, from configuration parameters file, is necessary. 
+
 ## Contributors
 
 - Jesús Hernando Sancha <jesushs80@gmail.com> (developer)
