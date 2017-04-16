@@ -10,18 +10,26 @@ use Phaba\Configuration\YamlConfigurationImp;
 
 class MysqlConnectorImpTest extends TestCase
 {
-    public function testCanConnectWithMysqlDatabase(): void
+    /**
+     * @var MysqlConnectorImp
+     */
+    private $conn;
+
+    public function setUp()
     {
         $config = new YamlConfigurationImp('tests/app/config');
-
-        $conn = new MysqlConnectorImp(
+        $this->conn = new MysqlConnectorImp(
             $config->getElement('database')['host'],
             $config->getElement('database')['port'],
             $config->getElement('database')['name'],
             $config->getElement('database')['user'],
             $config->getElement('database')['password']
         );
+    }
 
-        $this->assertEmpty($conn->getError());
+    public function testCanConnectWithMysqlDatabase(): void
+    {
+        $this->assertNotNull($this->conn->getConnection());
+        $this->conn->getConnection()->close();
     }
 }
