@@ -47,3 +47,5 @@ fabric.properties
 .idea/
 vendor/
 /tests/app/config/parameters.yaml
+/doc/
+/tests/report/
