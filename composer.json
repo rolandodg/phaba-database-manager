@@ -16,7 +16,8 @@
         "squizlabs/php_codesniffer": "^2.8",
         "phpdocumentor/phpdocumentor": "2.*",
         "phaba/phaba-configuration": "^1.0",
-        "phpmetrics/phpmetrics": "2.*"
+        "phpmetrics/phpmetrics": "2.*",
+        "phpunit/dbunit": "^3.0"
     },
     "autoload": {
         "psr-4": {
