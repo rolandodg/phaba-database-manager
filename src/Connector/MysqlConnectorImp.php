@@ -11,29 +11,22 @@ use mysqli;
  *
  * @package Phaba\DatabaseManager\Connector
  */
-class MysqlConnectorImp
+class MysqlConnectorImp implements Connector
 {
     private $conn;
-    public $data;
 
     public function __construct(string $host, int $port, string $name, string $user, string $password)
     {
-        $this->conn = new mysqli(
-            $host,
-            $user,
-            $password,
-            $name,
-            $port
-        );
+        $this->conn = new mysqli($host, $user, $password, $name, $port);
+    }
+
+    public function getConnection()
+    {
+        return $this->conn;
     }
 
     public function close()
     {
         mysqli_close($this->conn);
-    }
-
-    public function getError()
-    {
-        return mysqli_error($this->conn);
     }
 }
