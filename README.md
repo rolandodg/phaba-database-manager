@@ -2,8 +2,8 @@
 
 Database-Manager of Phaba is a library for managing databases used by your PHP project.
 Thank to this library you can:
+ - select, insert, update and delete database rows
  - execute SQL queries
- - insert, update and delete database rows
  
 ## Pre-requirements
 
