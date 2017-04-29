@@ -90,7 +90,8 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
             $this->getWhereClause().
             $this->getGroupByClause().
             $this->getOrderByClause().
-            $this->getLimitClause()
+            $this->getLimitClause().
+            $this->getOffSetClause()
         );
     }
 
@@ -169,5 +170,15 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
     private function getLimitClause(): string
     {
         return (null !== $this->limit)? ' limit '.$this->limit : '';
+    }
+
+    /**
+     * Build OFFSET clause
+     *
+     * @return string
+     */
+    private function getOffSetClause(): string
+    {
+        return (null !== $this->offSet)? ' offset '.$this->offSet : '';
     }
 }

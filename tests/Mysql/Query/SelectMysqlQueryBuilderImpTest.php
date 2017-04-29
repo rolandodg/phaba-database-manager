@@ -110,4 +110,16 @@ class SelectMysqlQueryBuilderImpTest extends TestCase
             $queryBuilder->getQuery()
         );
     }
+
+    public function testCanBuildSelectQueryWithOffsetClause()
+    {
+        $table = 'testTable';
+        $offSet = 123;
+        $queryBuilder = new SelectMysqlQueryBuilderImp($table, [], null, [], [], null, $offSet);
+
+        $this->assertEquals(
+            'select * from '.$table.' offset '.$offSet,
+            $queryBuilder->getQuery()
+        );
+    }
 }
