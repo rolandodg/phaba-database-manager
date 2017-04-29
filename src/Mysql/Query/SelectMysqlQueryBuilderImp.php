@@ -6,6 +6,11 @@ namespace Phaba\DatabaseManager\Mysql\Query;
 
 use Phaba\DatabaseManager\Mysql\MysqlQueryBuilder;
 
+/**
+ * For building MySql SELECT queries
+ *
+ * @package Phaba\DatabaseManager\Mysql\Query
+ */
 class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
 {
     /**
@@ -43,7 +48,17 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      */
     private $offSet;
 
-
+    /**
+     * SelectMysqlQueryBuilderImp constructor.
+     *
+     * @param string $table Table whose data will be read
+     * @param array $fields Fields that will be read
+     * @param string|null $where Where clause for filtering query results
+     * @param array $group GroupBy clause for grouping query results
+     * @param array $order OrderBy clause for sorting query results
+     * @param int|null $limit Limit clause for limiting query results rows number
+     * @param int|null $offSet Offset clause for restricting query results
+     */
     public function __construct(
         string $table,
         array $fields = [],
@@ -62,6 +77,11 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
         $this->offSet = $offSet;
     }
 
+    /**
+     * Build the SELECT query
+     *
+     * @return string
+     */
     public function getQuery(): string
     {
         return trim(
@@ -74,6 +94,11 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
         );
     }
 
+    /**
+     * Build SELECT clause
+     *
+     * @return string
+     */
     private function getSelectClause(): string
     {
         $clause = 'select ';
@@ -87,21 +112,41 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
         return $clause;
     }
 
+    /**
+     * Build FROM clause
+     *
+     * @return string
+     */
     private function getFromClause(): string
     {
         return ' from '.$this->table;
     }
 
+    /**
+     * Build WHERE clause
+     *
+     * @return string
+     */
     private function getWhereClause(): string
     {
         return (null==!$this->where)?' where '.$this->where:'';
     }
 
+    /**
+     * Build GROUPBY clause
+     *
+     * @return string
+     */
     private function getGroupByClause(): string
     {
         return (count($this->group))? ' groupBy '.implode(',', $this->group) : '';
     }
 
+    /**
+     * Build ORDERBY clause
+     *
+     * @return string
+     */
     private function getOrderByClause(): string
     {
         $clause = '';
@@ -116,6 +161,11 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
         return rtrim($clause, ',');
     }
 
+    /**
+     * Build LIMIT clause
+     *
+     * @return string
+     */
     private function getLimitClause(): string
     {
         return (null !== $this->limit)? ' limit '.$this->limit : '';
