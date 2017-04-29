@@ -1,0 +1,7 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    database_host: localhost
+    database_port: 3306
+    database_name: phaba_database_manager_test
+    database_user: ~
+    database_password: ~
