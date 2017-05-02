@@ -84,14 +84,12 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      */
     public function getQuery(): string
     {
-        return trim(
-            $this->getSelectClause().' '.
-            $this->getFromClause().' '.
-            $this->getWhereClause().' '.
-            $this->getGroupByClause().' '.
-            $this->getOrderByClause().' '.
-            $this->getLimitClause()
-        );
+        return $this->getSelectClause().
+            $this->getFromClause().
+            $this->getWhereClause().
+            $this->getGroupByClause().
+            $this->getOrderByClause().
+            $this->getLimitClause();
     }
 
     /**
@@ -119,7 +117,7 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      */
     private function getFromClause(): string
     {
-        return 'from '.$this->table;
+        return ' from '.$this->table;
     }
 
     /**
@@ -129,7 +127,7 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      */
     private function getWhereClause(): string
     {
-        return (!empty($this->where)) ? 'where '.$this->where : '';
+        return (!empty($this->where)) ? ' where '.$this->where : '';
     }
 
     /**
@@ -139,7 +137,7 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      */
     private function getGroupByClause(): string
     {
-        return (count($this->group))? 'group by '.implode(',', $this->group) : '';
+        return (count($this->group))? ' group by '.implode(',', $this->group) : '';
     }
 
     /**
@@ -152,9 +150,9 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
         $clause = '';
 
         if (count($this->order)) {
-            $clause = 'order by ';
+            $clause = ' order by ';
             foreach ($this->order as $field => $order) {
-                $clause .= (is_numeric($field) ? $order : $field . ' ' . strtoupper($order)) . ',';
+                $clause .= (is_numeric($field) ? "$order ASC" : $field . ' ' . strtoupper($order)) . ',';
             }
         }
 
@@ -171,9 +169,9 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
         $limit = '';
 
         if ($this->limit > -1) {
-            $limit = "limit $this->limit ";
+            $limit = " limit $this->limit";
             if ($this->offSet > -1) {
-                $limit .= "offset $this->offSet";
+                $limit .= " offset $this->offSet";
             }
         }
         return $limit;
