@@ -11,10 +11,10 @@ abstract class QueryBuilderFactory
     abstract public function createSelectQueryBuilder(
         string $table,
         array $fields = [],
-        string $where = null,
+        string $where = '',
         array $group = [],
         array $order = [],
-        int $limit = null,
-        int $offSet = null
+        int $limit = -1,
+        int $offSet = -1
     ): QueryBuilder;
 }

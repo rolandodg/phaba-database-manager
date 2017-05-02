@@ -53,20 +53,20 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      *
      * @param string $table Table whose data will be read
      * @param array $fields Fields that will be read
-     * @param string|null $where Where clause for filtering query results
+     * @param string $where Where clause for filtering query results
      * @param array $group GroupBy clause for grouping query results
      * @param array $order OrderBy clause for sorting query results
-     * @param int|null $limit Limit clause for limiting query results rows number
-     * @param int|null $offSet Offset clause for restricting query results
+     * @param int $limit Limit clause for limiting query results rows number
+     * @param int $offSet Offset clause for restricting query results
      */
     public function __construct(
         string $table,
         array $fields = [],
-        string $where = null,
+        string $where = '',
         array $group = [],
         array $order = [],
-        int $limit = null,
-        int $offSet = null
+        int $limit = -1,
+        int $offSet = -1
     ) {
         $this->table = $table;
         $this->fields = $fields;
@@ -85,13 +85,12 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
     public function getQuery(): string
     {
         return trim(
-            $this->getSelectClause().
-            $this->getFromClause().
-            $this->getWhereClause().
-            $this->getGroupByClause().
-            $this->getOrderByClause().
-            $this->getLimitClause().
-            $this->getOffSetClause()
+            $this->getSelectClause().' '.
+            $this->getFromClause().' '.
+            $this->getWhereClause().' '.
+            $this->getGroupByClause().' '.
+            $this->getOrderByClause().' '.
+            $this->getLimitClause()
         );
     }
 
@@ -120,7 +119,7 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      */
     private function getFromClause(): string
     {
-        return ' from '.$this->table;
+        return 'from '.$this->table;
     }
 
     /**
@@ -130,7 +129,7 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      */
     private function getWhereClause(): string
     {
-        return (null==!$this->where)?' where '.$this->where:'';
+        return (!empty($this->where)) ? 'where '.$this->where : '';
     }
 
     /**
@@ -140,7 +139,7 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      */
     private function getGroupByClause(): string
     {
-        return (count($this->group))? ' groupBy '.implode(',', $this->group) : '';
+        return (count($this->group))? 'group by '.implode(',', $this->group) : '';
     }
 
     /**
@@ -153,7 +152,7 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
         $clause = '';
 
         if (count($this->order)) {
-            $clause = ' orderby ';
+            $clause = 'order by ';
             foreach ($this->order as $field => $order) {
                 $clause .= (is_numeric($field) ? $order : $field . ' ' . strtoupper($order)) . ',';
             }
@@ -169,16 +168,14 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
      */
     private function getLimitClause(): string
     {
-        return (null !== $this->limit)? ' limit '.$this->limit : '';
-    }
+        $limit = '';
 
-    /**
-     * Build OFFSET clause
-     *
-     * @return string
-     */
-    private function getOffSetClause(): string
-    {
-        return (null !== $this->offSet)? ' offset '.$this->offSet : '';
+        if ($this->limit > -1) {
+            $limit = "limit $this->limit ";
+            if ($this->offSet > -1) {
+                $limit .= "offset $this->offSet";
+            }
+        }
+        return $limit;
     }
 }

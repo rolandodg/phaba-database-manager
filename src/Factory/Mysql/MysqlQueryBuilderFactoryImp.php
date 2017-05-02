@@ -13,11 +13,11 @@ class MysqlQueryBuilderFactoryImp extends QueryBuilderFactory
     public function createSelectQueryBuilder(
         string $table,
         array $fields = [],
-        string $where = null,
+        string $where = '',
         array $group = [],
         array $order = [],
-        int $limit = null,
-        int $offSet = null
+        int $limit = -1,
+        int $offSet = -1
     ): QueryBuilder {
         return new SelectMysqlQueryBuilderImp($table, $fields, $where, $group, $order, $limit, $offSet);
     }
