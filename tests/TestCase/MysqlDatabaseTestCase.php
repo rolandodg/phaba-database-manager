@@ -23,7 +23,8 @@ abstract class MysqlDatabaseTestCase extends TestCase
         if ($this->conn === null) {
             if (self::$pdo == null) {
                 self::$pdo = new \PDO(
-                    'mysql::host='.$config->getElement('database')['host'].';dbname='.$config->getElement('database')['name'],
+                    'mysql::host='.$config->getElement('database')['host'].
+                        ';dbname='.$config->getElement('database')['name'],
                     $config->getElement('database')['user'],
                     $config->getElement('database')['password']
                 );
