@@ -6,11 +6,6 @@ namespace Phaba\DatabaseManager\Mysql\Query;
 
 use Phaba\DatabaseManager\Mysql\MysqlQueryBuilder;
 
-/**
- * For building MySql SELECT queries
- *
- * @package Phaba\DatabaseManager\Mysql\Query
- */
 class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
 {
     /**
@@ -92,11 +87,6 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
             $this->getLimitClause();
     }
 
-    /**
-     * Build SELECT clause
-     *
-     * @return string
-     */
     private function getSelectClause(): string
     {
         $clause = 'select ';
@@ -110,41 +100,21 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
         return $clause;
     }
 
-    /**
-     * Build FROM clause
-     *
-     * @return string
-     */
     private function getFromClause(): string
     {
         return ' from '.$this->table;
     }
 
-    /**
-     * Build WHERE clause
-     *
-     * @return string
-     */
     private function getWhereClause(): string
     {
         return (!empty($this->where)) ? ' where '.$this->where : '';
     }
 
-    /**
-     * Build GROUPBY clause
-     *
-     * @return string
-     */
     private function getGroupByClause(): string
     {
         return (count($this->group))? ' group by '.implode(',', $this->group) : '';
     }
 
-    /**
-     * Build ORDERBY clause
-     *
-     * @return string
-     */
     private function getOrderByClause(): string
     {
         $clause = '';
@@ -159,11 +129,6 @@ class SelectMysqlQueryBuilderImp extends MysqlQueryBuilder
         return rtrim($clause, ',');
     }
 
-    /**
-     * Build LIMIT clause
-     *
-     * @return string
-     */
     private function getLimitClause(): string
     {
         $limit = '';
