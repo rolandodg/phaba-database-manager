@@ -8,8 +8,10 @@ use Phaba\Configuration\YamlConfigurationImp;
 use Phaba\DatabaseManager\Test\TestCase\MysqlDatabaseTestCase;
 use mysqli;
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
+use Phaba\DatabaseManager\Test\TestHelper\DataSetHelper;
+use Phaba\DatabaseManager\Mysql\MysqlQueryResultImp;
 
-class MysqlQueryResultImp extends MysqlDatabaseTestCase
+class MysqlQueryResultImpTest extends MysqlDatabaseTestCase
 {
     /**
      * @var string
@@ -43,12 +45,10 @@ class MysqlQueryResultImp extends MysqlDatabaseTestCase
     {
         $queryResult = new MysqlQueryResultImp($this->mysql_result);
         $queryResultArray = $queryResult->getResult();
-        $expectedResults = $this->getDataSet()->getTable($this->table);
 
-        for ($i = 0; $i < $expectedResults->getRowCount(); $i++) {
-            foreach ($expectedResults->getRow($i) as $column => $value) {
-                $this->assertEquals($value, $queryResultArray[$i][$column]);
-            }
-        }
+        $this->assertEquals(
+            DataSetHelper::dataSetTableToAssociativeArray($this->getDataSet()->getTable($this->table)),
+            $queryResultArray
+        );
     }
 }
