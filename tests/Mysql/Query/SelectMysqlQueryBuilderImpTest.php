@@ -20,24 +20,28 @@ class SelectMysqlQueryBuilderImpTest extends TestCase
         $this->queryHelper = new QueryHelper();
     }
 
+    /**
+     * @group unit
+     */
     public function testCanBuildSelectQueryWithoutFields()
     {
         $table = 'testTable';
         $queryBuilder = new SelectMysqlQueryBuilderImp($table);
         $this->assertEquals(
-            $this->queryHelper->buildQueryString($table),
+            $this->queryHelper->buildSelectQueryString($table),
             $queryBuilder->getQuery()
         );
     }
 
     /**
      * @dataProvider selectQueryProvider
+     * @group unit
      */
     public function testCanBuildSelectQuery(string $table, array $fields)
     {
         $queryBuilder = new SelectMysqlQueryBuilderImp($table, $fields);
         $this->assertEquals(
-            $this->queryHelper->buildQueryString($table, $fields),
+            $this->queryHelper->buildSelectQueryString($table, $fields),
             $queryBuilder->getQuery()
         );
     }
@@ -50,6 +54,9 @@ class SelectMysqlQueryBuilderImpTest extends TestCase
         ];
     }
 
+    /**
+     * @group unit
+     */
     public function testCanBuildSelectQueryWithWhereClause()
     {
         $table = 'testTable';
@@ -58,13 +65,14 @@ class SelectMysqlQueryBuilderImpTest extends TestCase
         $queryBuilder = new SelectMysqlQueryBuilderImp($table, $fields, $where);
 
         $this->assertEquals(
-            $this->queryHelper->buildQueryString($table, $fields, $where),
+            $this->queryHelper->buildSelectQueryString($table, $fields, $where),
             $queryBuilder->getQuery()
         );
     }
 
     /**
      * @dataProvider groupByProvider
+     * @group unit
      */
     public function testCanBuildSelectQueryWithGroupByClause(string $where, array $groupBy)
     {
@@ -73,7 +81,7 @@ class SelectMysqlQueryBuilderImpTest extends TestCase
         $queryBuilder = new SelectMysqlQueryBuilderImp($table, $fields, $where, $groupBy);
 
         $this->assertEquals(
-            $this->queryHelper->buildQueryString($table, $fields, $where, $groupBy),
+            $this->queryHelper->buildSelectQueryString($table, $fields, $where, $groupBy),
             $queryBuilder->getQuery()
         );
     }
@@ -88,6 +96,7 @@ class SelectMysqlQueryBuilderImpTest extends TestCase
 
     /**
      * @dataProvider orderByClauseProvider
+     * @group unit
      */
     public function testCanBuildSelectQueryWithOrderByClause(array $group, array $order)
     {
@@ -98,7 +107,7 @@ class SelectMysqlQueryBuilderImpTest extends TestCase
         $queryBuilder = new SelectMysqlQueryBuilderImp($table, $fields, $where, $group, $order);
 
         $this->assertEquals(
-            $this->queryHelper->buildQueryString($table, $fields, $where, $group, $order),
+            $this->queryHelper->buildSelectQueryString($table, $fields, $where, $group, $order),
             $queryBuilder->getQuery()
         );
     }
@@ -114,6 +123,7 @@ class SelectMysqlQueryBuilderImpTest extends TestCase
 
     /**
      * @dataProvider limitProvider
+     * @group unit
      */
     public function testCanBuildSelectQueryWithLimitClause(array $order, int $limit, int $offSet)
     {
@@ -124,7 +134,7 @@ class SelectMysqlQueryBuilderImpTest extends TestCase
         $queryBuilder = new SelectMysqlQueryBuilderImp($table, $fields, $where, $group, $order, $limit, $offSet);
 
         $this->assertEquals(
-            $this->queryHelper->buildQueryString($table, $fields, $where, $group, $order, $limit, $offSet),
+            $this->queryHelper->buildSelectQueryString($table, $fields, $where, $group, $order, $limit, $offSet),
             $queryBuilder->getQuery()
         );
     }

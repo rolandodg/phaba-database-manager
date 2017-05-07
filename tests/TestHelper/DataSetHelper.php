@@ -45,7 +45,7 @@ class DataSetHelper
         $dataSet = new QueryDataSet($conn);
         $dataSet->addTable(
             $table,
-            $queryHelper->buildQueryString($table, $fields, $where, $group, $order, $limit, $offset)
+            $queryHelper->buildSelectQueryString($table, $fields, $where, $group, $order, $limit, $offset)
         );
         return $dataSet;
     }

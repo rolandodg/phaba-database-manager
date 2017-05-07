@@ -41,6 +41,9 @@ class MysqlQueryResultImpTest extends MysqlDatabaseTestCase
         return new YamlDataSet("tests/app/data/$this->table.yml");
     }
 
+    /**
+     * @group integration
+     */
     public function testCanGetSelectResultAsArray(): void
     {
         $queryResult = new MysqlQueryResultImp($this->mysql_result);

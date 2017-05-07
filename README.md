@@ -31,12 +31,29 @@ PSR-2 PHP codification standard is used for writing phaba-database-manager sourc
  
 ## Testing
 
+This project contains:
+
++ Unit tests
++ Integration tests
+
 ### Pre-requirements
 
 - Create database for testing with corresponding tables.
 Necessary tables for testing can to be known through dataset files (tests/app/data/*.yml files)
 - Specify database connection data, from **configuration parameters** file, is necessary.
 - This library is testing against real database using DBUnit, so **pdo** & **pdo_mysql** PHP extensions have to be installed.
+
+### Unit tests
+
+We use @group PHPUnit annotation, with "unit" like group name, for grouping unit tests, so for running unit test you can use command below.
+
+    path/to/project/root$ vendor/bin/phpunit --group=unit tests/
+
+### Integration tests
+
+We use @group PHPUnit annotation, with "integration" like group name, for grouping unit tests, so for running integration test you can use command below.
+
+    path/to/project/root$ vendor/bin/phpunit --group=integration tests/
 
 ## Documentation
 

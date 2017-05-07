@@ -46,6 +46,9 @@ class MysqlDatabaseQueryImpTest extends MysqlDatabaseTestCase
         return new YamlDataSet("tests/app/data/$this->table.yml");
     }
 
+    /**
+     * @group integration
+     */
     public function testCanSelectAllData(): void
     {
         $this->assertEquals(
@@ -56,6 +59,7 @@ class MysqlDatabaseQueryImpTest extends MysqlDatabaseTestCase
 
     /**
      * @dataProvider fieldsProvider
+     * @group integration
      */
     public function testCanSelectDataForSpecifiedFields(array $fields): void
     {
@@ -77,6 +81,9 @@ class MysqlDatabaseQueryImpTest extends MysqlDatabaseTestCase
         ];
     }
 
+    /**
+     * @group integration
+     */
     public function testCanSelectFilteredDataWithWhereClause(): void
     {
         $fields = [];
@@ -93,6 +100,7 @@ class MysqlDatabaseQueryImpTest extends MysqlDatabaseTestCase
 
     /**
      * @dataProvider groupProvider
+     * @group integration
      */
     public function testCanSelectGroupingData($fields, $where, $group): void
     {
@@ -115,6 +123,7 @@ class MysqlDatabaseQueryImpTest extends MysqlDatabaseTestCase
 
     /**
      * @dataProvider orderProvider
+     * @group integration
      */
     public function testCanSelectSortingData($fields, $where, $group, $order): void
     {
@@ -144,6 +153,7 @@ class MysqlDatabaseQueryImpTest extends MysqlDatabaseTestCase
 
     /**
      * @dataProvider limitProvider
+     * @group integration
      */
     public function testCanLimitData($fields, $where, $group, $order, $limit, $offSet): void
     {

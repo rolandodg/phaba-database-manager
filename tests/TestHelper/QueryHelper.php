@@ -6,7 +6,7 @@ namespace Phaba\DatabaseManager\Test\TestHelper;
 
 class QueryHelper
 {
-    public function buildQueryString(
+    public function buildSelectQueryString(
         string $table,
         array $fields = [],
         string $where = '',

@@ -20,6 +20,9 @@ class MysqlQueryBuilderFactoryImpTest extends TestCase
         $this->factory = new MysqlQueryBuilderFactoryImp();
     }
 
+    /**
+     * @group unit
+     */
     public function testCanCreateMysqlSelectQueryBuilder(): void
     {
         $selectBuilder = $this->factory->createSelectQueryBuilder('tableTest', array('tableField'));
