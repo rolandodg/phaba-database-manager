@@ -16,10 +16,10 @@ class CreateUserTable extends AbstractMigration
             array('identity' => true, 'limit' => 11)
         )
             ->addColumn('firstName', 'string', array('limit' => 45))
-            ->addColumn('lastName', 'string', array('limit' => 45))
-            ->addColumn('team', 'string', array('limit' => 45))
-            ->addColumn('position', 'string', array('limit' => 45))
-            ->addColumn('salary', 'integer', array('limit' => 11))
+            ->addColumn('lastName', 'string', array('limit' => 45, 'null' => true))
+            ->addColumn('job', 'string', array('limit' => 45))
+            ->addColumn('residence', 'string', array('limit' => 45))
+            ->addColumn('money', 'integer', array('limit' => 11))
             ->create();
     }
 }
