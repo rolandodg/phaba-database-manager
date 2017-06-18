@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phaba\DatabaseManager\Test\TestCase;
 
-use Phaba\Configuration\YamlConfigurationImp;
+use Phaba\Configuration\YamlConfigurationReaderImp;
 use PHPUnit\DbUnit\TestCaseTrait;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +18,7 @@ abstract class MysqlDatabaseTestCase extends TestCase
 
     final public function getConnection()
     {
-        $config = new YamlConfigurationImp('tests/app/config');
+        $config = YamlConfigurationReaderImp::getInstance('tests/app/config');
 
         if ($this->conn === null) {
             if (self::$pdo == null) {
@@ -31,6 +31,8 @@ abstract class MysqlDatabaseTestCase extends TestCase
             }
             $this->conn = $this->createDefaultDBConnection(self::$pdo, $config->getElement('database')['name']);
         }
+
+        YamlConfigurationReaderImp::reset();
         return $this->conn;
     }
 }
