@@ -18,7 +18,6 @@ Install phaba-database-manager library through Composer
 
 `your/project/root/path$ composer require phaba/database-manager`
 
-
 ## Development
 
 For developing new features of phaba-database-manager you have to install dependencies through composer.
@@ -39,9 +38,12 @@ This project contains:
 ### Pre-requirements
 
 - Create database for testing with corresponding tables.
-Necessary tables for testing can to be known through dataset files (tests/app/data/*.yml files)
-- Specify database connection data, from **configuration parameters** file, is necessary.
-- This library is testing against real database using DBUnit, so **pdo** & **pdo_mysql** PHP extensions have to be installed.
+- Execute database migrations
+
+`path/to/project/root$ vendor/bin/phinx migrate`
+
+- Specify database connection data, from **configuration parameters** file (app/config/parameters.yaml), is necessary.
+- This library is testing against real database using DBUnit, so **pdo** and **pdo_mysql** PHP extensions have to be installed.
 
 ### Unit tests
 
