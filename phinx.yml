@@ -9,7 +9,7 @@ environments:
     testing:
         adapter: mysql
         host: 127.0.0.1
-        name: phaba__database_manager_test
+        name: phaba_database_manager_test
         user: test_user
         pass: T3$tU$3r__p4$$w0rd
         port: 3306
