@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phaba\DatabaseManager\Test\Mysql;
 
-use Phaba\Configuration\YamlConfigurationImp;
+use Phaba\Configuration\YamlConfigurationReaderImp;
 use Phaba\DatabaseManager\Test\TestCase\MysqlDatabaseTestCase;
 use mysqli;
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
@@ -24,7 +24,7 @@ class MysqlQueryResultImpTest extends MysqlDatabaseTestCase
     {
         $this->table = 'user';
 
-        $config = new YamlConfigurationImp('tests/app/config');
+        $config = YamlConfigurationReaderImp::getInstance('app/config');
         $mysqli = new mysqli(
             $config->getElement('database')['host'],
             $config->getElement('database')['user'],
@@ -32,7 +32,7 @@ class MysqlQueryResultImpTest extends MysqlDatabaseTestCase
             $config->getElement('database')['name']
         );
         $this->mysql_result = $mysqli->query("SELECT * FROM $this->table");
-
+        YamlConfigurationReaderImp::reset();
         parent::setUp();
     }
 

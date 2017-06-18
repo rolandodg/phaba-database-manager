@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phaba\DatabaseManager\Tests\Mysql;
 
-use Phaba\Configuration\YamlConfigurationImp;
+use Phaba\Configuration\YamlConfigurationReaderImp;
 use Phaba\DatabaseManager\Mysql\MysqlDatabaseQueryImp;
 use Phaba\DatabaseManager\Test\TestCase\MysqlDatabaseTestCase;
 use Phaba\DatabaseManager\Test\TestHelper\DataSetHelper;
@@ -30,7 +30,7 @@ class MysqlDatabaseQueryImpTest extends MysqlDatabaseTestCase
     public function setUp()
     {
         parent::setUp();
-        $config = new YamlConfigurationImp('tests/app/config');
+        $config = YamlConfigurationReaderImp::getInstance('app/config');
         $this->databaseQuery = new MysqlDatabaseQueryImp(
             $config->getElement('database')['host'],
             $config->getElement('database')['port'],
@@ -39,6 +39,7 @@ class MysqlDatabaseQueryImpTest extends MysqlDatabaseTestCase
             $config->getElement('database')['password']
         );
         $this->dataSetHelper = new DataSetHelper();
+        YamlConfigurationReaderImp::reset();
     }
 
     protected function getDataSet()
