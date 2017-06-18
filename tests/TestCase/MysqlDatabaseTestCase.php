@@ -18,7 +18,7 @@ abstract class MysqlDatabaseTestCase extends TestCase
 
     final public function getConnection()
     {
-        $config = YamlConfigurationReaderImp::getInstance('tests/app/config');
+        $config = YamlConfigurationReaderImp::getInstance('app/config');
 
         if ($this->conn === null) {
             if (self::$pdo == null) {
