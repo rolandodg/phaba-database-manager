@@ -4,12 +4,6 @@
         bootstrap="tests/bootstrap.php"
         verbose="true"
 >
-
-    <testsuites>
-        <testsuite name="fast">
-            <directory>tests/Connector</directory>
-        </testsuite>
-    </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src/</directory>
