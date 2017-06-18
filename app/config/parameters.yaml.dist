@@ -1,0 +1,8 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+parameters:
+    test_database_host: 127.0.0.1
+    test_database_port: ~
+    test_database_name: laliga_test
+    test_database_user: ~
+    test_database_password: ~

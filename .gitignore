@@ -50,3 +50,4 @@ vendor/
 /doc/
 /tests/report/
 /metrics/
+/app/config/parameters.yaml

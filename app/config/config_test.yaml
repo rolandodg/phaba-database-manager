@@ -1,0 +1,9 @@
+import:
+    - {resource: parameters.yaml}
+
+database:
+    host: "%test_database_host%"
+    port: "%test_database_port%"
+    name: "%test_database_name%"
+    user: "%test_database_user%"
+    password: "%test_database_password%"

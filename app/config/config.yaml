@@ -1,0 +1,2 @@
+import:
+    - {resource: parameters.yaml}
